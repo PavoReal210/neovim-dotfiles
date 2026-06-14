@@ -12,7 +12,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "bashls", "lua_ls", "pyright", "ts_ls",
-          "rust_analyzer", "nixd",
+          "rust_analyzer", "clangd",
         },
       })
     end,
@@ -21,7 +21,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason-lspconfig" },
     config = function()
-      local servers = { "bashls", "lua_ls", "pyright", "ts_ls", "rust_analyzer", "nixd" }
+      local servers = { "bashls", "lua_ls", "pyright", "ts_ls", "rust_analyzer", "nixd", "clangd" }
       for _, server in ipairs(servers) do
         vim.lsp.enable(server)
       end
