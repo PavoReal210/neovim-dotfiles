@@ -21,10 +21,9 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason-lspconfig" },
     config = function()
-      local lspconfig = require("lspconfig")
       local servers = { "bashls", "lua_ls", "pyright", "ts_ls", "rust_analyzer", "nixd" }
       for _, server in ipairs(servers) do
-        lspconfig[server].setup({})
+        vim.lsp.enable(server)
       end
     end,
   },
