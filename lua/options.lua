@@ -14,3 +14,5 @@ vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.spelllang = { "en", "es" }
