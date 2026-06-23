@@ -105,6 +105,8 @@ Leader key is `<Space>`.
 | `<leader>gl`    | Git log          |
 | `<leader>gd`    | Git diff         |
 
+> **Note:** `<leader>ga`, `<leader>gA`, and `<leader>gS` are planned but not yet mapped in `keymaps.lua`.
+
 ## Common Hotkeys
 
 A quick reference for frequently used Neovim and plugin hotkeys.
@@ -212,6 +214,27 @@ A quick reference for frequently used Neovim and plugin hotkeys.
 | `:tabnew`        | Open new tab              |
 | `gt` / `gT`      | Next / previous tab       |
 | `:q`             | Close split or tab        |
+
+### Git (vim-fugitive + gitsigns)
+
+| Key / Command                 | Action                                      |
+| ----------------------------- | ------------------------------------------- |
+| `<leader>gs`                  | Open fugitive status window                 |
+| `s`                           | Stage file under cursor (in status window)  |
+| `u`                           | Unstage file under cursor (in status window)|
+| `-`                           | Toggle stage/unstage (in status window)     |
+| `S`                           | Stage all (in status window)                |
+| `cc`                          | Create commit (in status window)            |
+| `:Git commit`                 | Open commit message buffer                  |
+| `:Git push`                   | Push to remote                              |
+| `:Git log -- %`               | Git log filtered to current file            |
+| `:G blame`                    | Open blame window for current file (`q` to close) |
+| `:Gitsigns blame_line`        | Show commit & author for current line       |
+| `:Gitsigns preview_blame`     | Preview blame info inline (virtual text)    |
+| `:Telescope git_bcommits`     | Pickable list of commits touching current file |
+
+When `cc` is pressed in the status window, a commit message buffer opens.
+Write the message and save/quit (`:wq`) to complete the commit.
 
 ### Useful Commands
 
