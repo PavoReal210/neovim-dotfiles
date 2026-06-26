@@ -4,8 +4,8 @@ return {
     vim.g.vimwiki_list = {
       {
         path = "~/Dropbox/vimwiki",
-        syntax = "default",
-        ext = ".wiki",
+        syntax = "markdown",
+        ext = ".md",
       },
     }
     vim.g.vimwiki_code_highlight = 1
@@ -17,9 +17,9 @@ return {
       local img_dir = wiki_dir .. "/images"
       local filename = os.date("screenshot-%Y-%m-%d-%H%M%S") .. ".png"
       vim.fn.mkdir(img_dir, "p")
-      local ret = vim.fn.system("grimshot save area " .. vim.fn.shellescape(img_dir .. "/" .. filename))
+      vim.fn.system("screencapture -i " .. vim.fn.shellescape(img_dir .. "/" .. filename))
       if vim.v.shell_error == 0 then
-        vim.api.nvim_put({ "{{" .. filename .. "}}" }, "c", true, true)
+        vim.api.nvim_put({ "![](" .. "images/" .. filename .. ")" }, "c", true, true)
       end
     end, {})
   end,
