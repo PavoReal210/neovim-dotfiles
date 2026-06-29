@@ -23,6 +23,7 @@ neovim-dotfiles/
 │       ├── lualine.lua        # lualine.nvim (statusline)
 │       ├── media.lua          # media handlers (video/audio external open)
 │       ├── nvimtree.lua       # nvim-tree.lua (file explorer)
+│       ├── org.lua            # nvim-orgmode/orgmode (Org mode)
 │       ├── pdf.lua            # pdfreader.nvim (in-editor PDF viewer)
 │       ├── telescope.lua      # telescope.nvim (fuzzy finder)
 │       ├── treesitter.lua     # nvim-treesitter (syntax highlighting)
@@ -49,6 +50,7 @@ neovim-dotfiles/
 | [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)                                                         | Toggleable terminal                 |
 | [image.nvim](https://github.com/3rd/image.nvim)                                                                       | Inline image rendering (png/jpg/gif/svg) |
 | [pdfreader.nvim](https://github.com/r-pletnev/pdfreader.nvim)                                                         | In-editor PDF viewer with bookmarks |
+| [nvim-orgmode/orgmode](https://github.com/nvim-orgmode/orgmode)                                                       | Org mode (agenda, capture, TODO, clocking) |
 | media-handlers (custom)                                                                                               | Video/audio external open + keymaps |
 
 ## LSP Servers
@@ -112,6 +114,11 @@ Leader key is `<Space>`.
 | `<leader>gd`    | Git diff         |
 | `<leader>mp`    | Play current file with mpv |
 | `<leader>mo`    | Open current file with system default |
+| `<leader>oa`    | Org agenda                           |
+| `<leader>oc`    | Org capture                          |
+| `<leader>ol`    | Org TODO toggle                      |
+| `<leader>ot`    | Org clock in                         |
+| `<leader>oO`    | Org clock out                        |
 
 ## Common Hotkeys
 
@@ -236,6 +243,37 @@ A quick reference for frequently used Neovim and plugin hotkeys.
 Note: Image rendering works in Ghostty (Kitty graphics protocol).
 PDF reader requires `imagemagick`, `poppler-utils`, and `ghostscript`
 on your system.
+
+#### Org Mode (nvim-orgmode/orgmode)
+
+Org notes are stored in `~/Dropbox/org-notes/`.
+
+| Key / Command                              | Action                          |
+| ------------------------------------------ | ------------------------------- |
+| `<leader>oa`                               | Open org agenda                 |
+| `<leader>oc`                               | Org capture                     |
+| `<leader>ol`                               | Toggle TODO state               |
+| `<leader>ot`                               | Clock in                        |
+| `<leader>oO`                               | Clock out                       |
+| `<leader>oi`                               | Refiling                        |
+| `<leader>oN`                               | Create new heading              |
+| `:Telescope find_files`                    | Search org files                |
+| `:Telescope live_grep`                     | Search org file contents        |
+
+Treesitter auto-installs the `org` grammar on first open.
+
+## Setup
+
+### Dropbox / Maestral Symlink
+
+The org directory `~/Dropbox/org-notes/` is accessed via a symlink:
+
+```bash
+ln -s "/home/pavo_real/Dropbox (Maestral)" /home/pavo_real/Dropbox
+```
+
+This maps the cleaner `~/Dropbox` path to the actual Maestral sync directory,
+keeping org file paths consistent across Neovim and Doom Emacs.
 
 ## System Dependencies
 
