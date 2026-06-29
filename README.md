@@ -17,10 +17,13 @@ neovim-dotfiles/
 │       ├── cmp.lua            # nvim-cmp (autocompletion) + LuaSnip
 │       ├── comment.lua        # Comment.nvim
 │       ├── gitsigns.lua       # gitsigns.nvim (git decorations)
+│       ├── image.lua          # 3rd/image.nvim (inline image rendering)
 │       ├── indentline.lua     # indent-blankline.nvim
 │       ├── lsp.lua            # mason.nvim + lspconfig (LSP servers)
 │       ├── lualine.lua        # lualine.nvim (statusline)
+│       ├── media.lua          # media handlers (video/audio external open)
 │       ├── nvimtree.lua       # nvim-tree.lua (file explorer)
+│       ├── pdf.lua            # pdfreader.nvim (in-editor PDF viewer)
 │       ├── telescope.lua      # telescope.nvim (fuzzy finder)
 │       ├── treesitter.lua     # nvim-treesitter (syntax highlighting)
 │       └── whichkey.lua       # which-key.nvim (keymap popup)
@@ -44,6 +47,9 @@ neovim-dotfiles/
 | [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)                                       | Indentation guides                  |
 | [vim-fugitive](https://github.com/tpope/vim-fugitive)                                                                 | Git porcelain (commit, push, etc.)  |
 | [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)                                                         | Toggleable terminal                 |
+| [image.nvim](https://github.com/3rd/image.nvim)                                                                       | Inline image rendering (png/jpg/gif/svg) |
+| [pdfreader.nvim](https://github.com/r-pletnev/pdfreader.nvim)                                                         | In-editor PDF viewer with bookmarks |
+| media-handlers (custom)                                                                                               | Video/audio external open + keymaps |
 
 ## LSP Servers
 
@@ -104,6 +110,8 @@ Leader key is `<Space>`.
 | `<leader>gc`    | Git commit       |
 | `<leader>gl`    | Git log          |
 | `<leader>gd`    | Git diff         |
+| `<leader>mp`    | Play current file with mpv |
+| `<leader>mo`    | Open current file with system default |
 
 ## Common Hotkeys
 
@@ -185,6 +193,7 @@ A quick reference for frequently used Neovim and plugin hotkeys.
 | `c`       | Copy file                           |
 | `x`       | Cut file                            |
 | `p`       | Paste file                          |
+| `O`       | Open with system default application |
 | `R`       | Refresh tree                        |
 
 ### LSP
@@ -213,7 +222,46 @@ A quick reference for frequently used Neovim and plugin hotkeys.
 | `gt` / `gT`      | Next / previous tab       |
 | `:q`             | Close split or tab        |
 
-### Useful Commands
+#### Image / PDF (image.nvim / pdfreader.nvim)
+
+| Key / Command                              | Action                          |
+| ------------------------------------------ | ------------------------------- |
+| `:e image.png`                             | Render image inline in buffer   |
+| `:e document.pdf`                          | Open PDF reader                 |
+| `:PDFReader setViewMode dark`              | Switch PDF to dark mode         |
+| `:PDFReader showToc`                       | Show PDF table of contents      |
+| `:PDFReader addBookmark`                   | Bookmark current PDF page       |
+| `h` / `l`                                  | Previous / next PDF page        |
+
+Note: Image rendering works in Ghostty (Kitty graphics protocol).
+PDF reader requires `imagemagick`, `poppler-utils`, and `ghostscript`
+on your system.
+
+## System Dependencies
+
+The following packages must be installed on your system:
+
+| Package         | Needed by         | Purpose                         |
+| --------------- | ----------------- | ------------------------------- |
+| `imagemagick`   | image.nvim        | Image format conversion         |
+| `magick` (lua)  | image.nvim        | Lua FFI bindings to ImageMagick |
+| `poppler-utils` | pdfreader.nvim    | PDF rasterization (pdftoppm)    |
+| `ghostscript`   | pdfreader.nvim    | PDF processing for ImageMagick  |
+| `mpv`           | media handlers    | Video playback                  |
+
+On **NixOS** (via home-manager), add to your config:
+
+```nix
+programs.neovim = {
+  enable = true;
+  extraLuaPackages = ps: [ ps.magick ];
+  extraPackages = [ pkgs.poppler_utils pkgs.ghostscript ];
+};
+
+home.packages = with pkgs; [ imagemagick mpv ];
+```
+
+## Useful Commands
 
 | Command        | Action                                      |
 | -------------- | ------------------------------------------- |
